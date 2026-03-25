@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  body {
+    @apply min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-midnight dark:text-slate-100;
+    background-image:
+      radial-gradient(circle at top right, rgba(125, 211, 252, 0.15), transparent 24%),
+      radial-gradient(circle at bottom left, rgba(52, 211, 153, 0.12), transparent 24%),
+      linear-gradient(180deg, rgba(248, 250, 252, 1) 0%, rgba(226, 232, 240, 0.92) 100%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at top right, rgba(125, 211, 252, 0.14), transparent 24%),
+      radial-gradient(circle at bottom left, rgba(52, 211, 153, 0.12), transparent 24%),
+      linear-gradient(180deg, rgba(8, 17, 31, 1) 0%, rgba(12, 22, 38, 0.96) 100%);
+  }
+
+  * {
+    @apply border-slate-200 dark:border-slate-800;
+  }
+}
+
+@layer components {
+  .surface-panel {
+    @apply rounded-3xl border border-white/20 bg-white/75 p-6 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70;
+  }
+
+  .surface-panel-tight {
+    @apply rounded-2xl border border-white/20 bg-white/75 p-4 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/70;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    @apply text-xl font-bold tracking-tight;
+  }
+
+  .soft-input {
+    @apply w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-sm text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:border-sky-400 focus:bg-white dark:border-slate-700 dark:bg-slate-950/70 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-sky-500;
+  }
+
+  .soft-button {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold transition duration-200;
+  }
+}
