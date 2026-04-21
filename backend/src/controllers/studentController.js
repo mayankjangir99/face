@@ -4,13 +4,7 @@ import { removeStoredFiles } from '../utils/fileUtils.js';
 import { serializeStudent } from '../utils/serializers.js';
 
 const getUploadedImagePaths = (files = []) =>
-  files.map((file) => {
-    if (file.buffer) {
-      return `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
-    }
-
-    return `uploads/students/${file.filename}`.replace(/\\/g, '/');
-  });
+  files.map((file) => `uploads/students/${file.filename}`.replace(/\\/g, '/'));
 
 const extractJsonArray = (value) => {
   if (!value) {

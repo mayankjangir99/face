@@ -51,9 +51,7 @@ export const initSocket = (server) => {
 
 export const getSocket = () => {
   if (!io) {
-    return {
-      emit: () => {}
-    };
+    throw new Error('Socket.io has not been initialized.');
   }
 
   return io;

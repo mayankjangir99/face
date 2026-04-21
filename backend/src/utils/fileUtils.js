@@ -9,10 +9,6 @@ export const buildFileUrl = (req, filePath) => {
     return '';
   }
 
-  if (filePath.startsWith('data:') || filePath.startsWith('http://') || filePath.startsWith('https://')) {
-    return filePath;
-  }
-
   const normalizedPath = sanitizeRelativePath(filePath);
   return `${req.protocol}://${req.get('host')}/${normalizedPath}`;
 };
@@ -38,11 +34,6 @@ export const saveSnapshotFromDataUrl = async (snapshotDataUrl, prefix = 'attenda
   };
 
   const extension = extensionMap[mimeType] || '.png';
-
-  if (process.env.VERCEL === '1') {
-    return `data:${mimeType};base64,${base64Data}`;
-  }
-
   const fileName = `${prefix}-${Date.now()}${extension}`;
   const absolutePath = path.join(attendanceUploadRoot, fileName);
 
@@ -56,10 +47,6 @@ export const removeStoredFiles = async (filePaths = []) => {
   await Promise.all(
     filePaths.filter(Boolean).map(async (filePath) => {
       try {
-        if (filePath.startsWith('data:') || filePath.startsWith('http://') || filePath.startsWith('https://')) {
-          return;
-        }
-
         const normalizedPath = sanitizeRelativePath(filePath);
         await fs.unlink(path.join(backendRoot, normalizedPath));
       } catch (error) {

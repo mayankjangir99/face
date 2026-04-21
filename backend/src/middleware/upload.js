@@ -4,13 +4,9 @@ import multer from 'multer';
 import { randomUUID } from 'crypto';
 import { studentsUploadRoot } from '../config/paths.js';
 
-const isServerless = process.env.VERCEL === '1';
+fs.mkdirSync(studentsUploadRoot, { recursive: true });
 
-if (!isServerless) {
-  fs.mkdirSync(studentsUploadRoot, { recursive: true });
-}
-
-const diskStorage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: (_req, _file, callback) => {
     callback(null, studentsUploadRoot);
   },
@@ -19,8 +15,6 @@ const diskStorage = multer.diskStorage({
     callback(null, `${Date.now()}-${randomUUID()}${extension}`);
   }
 });
-
-const storage = isServerless ? multer.memoryStorage() : diskStorage;
 
 const fileFilter = (_req, file, callback) => {
   if (file.mimetype.startsWith('image/')) {
