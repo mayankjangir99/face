@@ -6,5 +6,8 @@ frontend/.env
 backend/uploads/*
 !backend/uploads/students/
 !backend/uploads/attendance/
+backend/uploads/students/*
+backend/uploads/attendance/*
 !backend/uploads/students/.gitkeep
 !backend/uploads/attendance/.gitkeep
+dev-*.log
