@@ -4,7 +4,7 @@ import { getApiBaseUrl } from '../api/client.js';
 let socket;
 
 export const connectSocket = (token) => {
-  if (!token) {
+  if (!token || import.meta.env.VITE_ENABLE_SOCKET !== 'true') {
     return null;
   }
 

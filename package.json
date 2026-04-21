@@ -1,6 +1,7 @@
 {
   "name": "face-recognition-attendance-system",
   "private": true,
+  "type": "module",
   "workspaces": [
     "backend",
     "frontend"

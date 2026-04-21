@@ -12,10 +12,11 @@ const app = express();
 const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim());
+const allowAnyOrigin = allowedOrigins.includes('*');
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: allowAnyOrigin ? true : allowedOrigins,
     credentials: true
   })
 );
@@ -39,6 +40,9 @@ app.get('/health', (_req, res) => {
 app.use(authRoutes);
 app.use(studentRoutes);
 app.use(attendanceRoutes);
+app.use('/api', authRoutes);
+app.use('/api', studentRoutes);
+app.use('/api', attendanceRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
